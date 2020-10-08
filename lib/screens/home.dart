@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../delegate/data_search.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -10,28 +11,26 @@ class Home extends StatelessWidget {
           child: Image.asset('assets/images/youtube.png'),
         ),
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white70,
         actions: <Widget>[
           Align(
             alignment: Alignment.center,
             child: Text(
               '0',
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.grey[900],
                   fontSize: 20,
-                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold),
             ),
           ),
           IconButton(
-              icon: Icon(Icons.star, color: Colors.black87),
-              onPressed: () {
-
-              }),
+              icon: Icon(Icons.star, color: Colors.black87), onPressed: () {}),
           IconButton(
               icon: Icon(Icons.search, color: Colors.black87),
-              onPressed: () {
-                
+              onPressed: () async {
+                var result =
+                    await showSearch(context: context, delegate: DataSearch());
+                print(result);
               }),
         ],
       ),

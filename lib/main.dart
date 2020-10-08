@@ -3,7 +3,6 @@ import 'api.dart';
 import 'screens/home.dart';
 
 void main() {
-
   var api = Api();
   api.search('flutter');
 
@@ -15,6 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'YouFlutterTube',
+      theme: ThemeData(
+        brightness: Brightness.light,
+        accentColor: Colors.cyan[900],
+        fontFamily: 'Roboto',
+      ),
       home: Home(),
     );
   }
