@@ -7,10 +7,7 @@
 <h2 align="center">About 📖</h2>
    
 <p align="center">
-   <br>
-   <br>
-   <br>
-   <a href=""></a>
+   This is a relatively simple app using the BLoC Pattern from Flutter, with the introduction to Streams. 🎯
 </p>
 
 ---
