@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'api.dart';
 import 'screens/home.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  var api = Api();
+  api.search('flutter');
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'YouFlutterTube',
+      theme: ThemeData(
+        brightness: Brightness.light,
+        accentColor: Colors.cyan[900],
+        fontFamily: 'Roboto',
+      ),
       home: Home(),
     );
   }
