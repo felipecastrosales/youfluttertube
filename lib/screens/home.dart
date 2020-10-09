@@ -1,14 +1,17 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import '../blocs/favorite_bloc.dart';
 import '../blocs/videos_bloc.dart';
 import '../delegate/data_search.dart';
+import '../models/video.dart';
 import '../widgets/video_tile.dart';
 
 class Home extends StatelessWidget {
-  final bloc = BlocProvider.of<VideosBloc>(context);
-
   @override
   Widget build(BuildContext context) {
+    
+    final bloc = BlocProvider.of<VideosBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -20,13 +23,21 @@ class Home extends StatelessWidget {
         actions: <Widget>[
           Align(
             alignment: Alignment.center,
-            child: Text(
-              '0',
-              style: TextStyle(
-                  color: Colors.grey[900],
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
+            child: StreamBuilder<Map<String, Video>>(
+                stream: BlocProvider.of<FavoriteBloc>(context).outFav,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      '${snapshot.data.length}',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18
+                      ),
+                      );
+                  } else {
+                    return Container();
+                  }
+                }),
           ),
           IconButton(
               icon: Icon(Icons.star, color: Colors.black87), onPressed: () {}),

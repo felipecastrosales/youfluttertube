@@ -13,11 +13,29 @@ class Video {
       @required this.channel});
 
   factory Video.fromJson(Map<String, dynamic> json) {
-    return Video(
-      id: json['id']['videoId'],
-      title: json['snippet']['title'],
-      thumb: json['thumbnails']['high']['url'],
-      channel: json['channelTitle'],
-    );
+    if (json.containsKey('id')) {
+      return Video(
+        id: json['id']['videoId'],
+        title: json['snippet']['title'],
+        thumb: json['snippet']['thumbnails']['high']['url'],
+        channel: json['snippet']['channelTitle']
+      );
+    } else {
+      return Video(
+        id: json['id'],
+        title: json['title'],
+        thumb: json['thumb'],
+        channel: json['channel']
+      );
+    }
+  }
+
+  Future<Map<String, dynamic>> toJson() async {
+    return {
+      'videoId': id,
+      'title': title,
+      'thumb': thumb,
+      'channel': channel,
+    };
   }
 }

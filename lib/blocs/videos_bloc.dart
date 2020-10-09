@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../api.dart';
 import '../models/video.dart';
 
-class VideosBloc extends BlocBase {
+class VideosBloc implements BlocBase {
   Api api;
 
   List<Video> videos;
