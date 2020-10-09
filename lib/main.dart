@@ -1,5 +1,7 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'api.dart';
+import 'blocs/videos_bloc.dart';
 import 'screens/home.dart';
 
 void main() {
@@ -12,14 +14,19 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'YouFlutterTube',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        accentColor: Colors.cyan[900],
-        fontFamily: 'Roboto',
-      ),
-      home: Home(),
+    return BlocProvider(
+      bloc: VideosBloc(
+        child: MaterialApp(
+          title: 'YouFlutterTube',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            brightness: Brightness.light,
+            accentColor: Colors.cyan[900],
+            fontFamily: 'Roboto',
+          ),
+          home: Home(),
+        ),
+      ), child: null,
     );
   }
 }
