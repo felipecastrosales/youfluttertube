@@ -23,11 +23,17 @@ class VideosBloc extends BlocBase {
   }
 
   void _search(String search) async {
-    videos = await api.search(search);
+    if (_search != null) {
+      _videosController.sink.add([]);
+      videos = await api.search(search);
+    } else {
+      videos += await api.nextPage();
+    }
     _videosController.sink.add(videos);
   }
 
   @override
+  // ignore: must_call_super
   void dispose() {
     _videosController.close();
     _searchController.close();

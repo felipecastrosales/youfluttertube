@@ -5,6 +5,8 @@ import '../delegate/data_search.dart';
 import '../widgets/video_tile.dart';
 
 class Home extends StatelessWidget {
+  final bloc = BlocProvider.of<VideosBloc>(context);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,18 +36,36 @@ class Home extends StatelessWidget {
                 var result =
                     await showSearch(context: context, delegate: DataSearch());
                 if (result != null) {
-                  BlocProvider.of<VideosBloc>(context).inSearch.add(result);
+                  bloc.inSearch.add(result);
                 }
               }),
         ],
       ),
       body: StreamBuilder(
-          stream: BlocProvider.of<VideosBloc>(context).outVideos,
+          stream: bloc.outVideos,
+          initialData: [],
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(itemBuilder: (context, index) {
-                return VideoTile(snapshot.data[index]);
-              });
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  if (index < snapshot.data.length) {
+                    return VideoTile(snapshot.data[index]);
+                  } else if (index > 1) {
+                    bloc.inSearch.add(null);
+                    return Container(
+                      width: 40,
+                      height: 40,
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+                itemCount: snapshot.data.length + 1,
+              );
             } else {
               return Container();
             }
