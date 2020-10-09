@@ -1,7 +1,12 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import '../blocs/videos_bloc.dart';
 import '../delegate/data_search.dart';
+import '../widgets/video_tile.dart';
 
 class Home extends StatelessWidget {
+  final bloc = BlocProvider.of<VideosBloc>(context);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +35,41 @@ class Home extends StatelessWidget {
               onPressed: () async {
                 var result =
                     await showSearch(context: context, delegate: DataSearch());
-                print(result);
+                if (result != null) {
+                  bloc.inSearch.add(result);
+                }
               }),
         ],
       ),
-      body: Container(),
+      body: StreamBuilder(
+          stream: bloc.outVideos,
+          initialData: [],
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  if (index < snapshot.data.length) {
+                    return VideoTile(snapshot.data[index]);
+                  } else if (index > 1) {
+                    bloc.inSearch.add(null);
+                    return Container(
+                      width: 40,
+                      height: 40,
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+                itemCount: snapshot.data.length + 1,
+              );
+            } else {
+              return Container();
+            }
+          }),
     );
   }
 }
