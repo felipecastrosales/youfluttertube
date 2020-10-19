@@ -5,11 +5,11 @@ import '../blocs/videos_bloc.dart';
 import '../delegate/data_search.dart';
 import '../models/video.dart';
 import '../widgets/video_tile.dart';
+import 'favorites.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     final bloc = BlocProvider.of<VideosBloc>(context);
 
     return Scaffold(
@@ -29,18 +29,19 @@ class Home extends StatelessWidget {
                   if (snapshot.hasData) {
                     return Text(
                       '${snapshot.data.length}',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18
-                      ),
-                      );
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    );
                   } else {
                     return Container();
                   }
                 }),
           ),
           IconButton(
-              icon: Icon(Icons.star, color: Colors.black87), onPressed: () {}),
+              icon: Icon(Icons.star, color: Colors.black87),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Favorites()));
+              }),
           IconButton(
               icon: Icon(Icons.search, color: Colors.black87),
               onPressed: () async {

@@ -19,15 +19,15 @@ class MyApp extends StatelessWidget {
       bloc: VideosBloc(),
       child: BlocProvider(
         bloc: FavoriteBloc(),
-          child: MaterialApp(
-            title: 'YouFlutterTube',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              brightness: Brightness.light,
-              accentColor: Colors.cyan[900],
-              fontFamily: 'Roboto',
-            ),
+        child: MaterialApp(
+          title: 'YouFlutterTube',
+          debugShowCheckedModeBanner: false,
           home: Home(),
+          theme: ThemeData(
+            brightness: Brightness.light,
+            accentColor: Colors.red,
+            fontFamily: 'Roboto',
+          ),
         ),
       ),
     );

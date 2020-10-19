@@ -33,7 +33,6 @@ class VideosBloc implements BlocBase {
   }
 
   @override
-  // ignore: must_call_super
   void dispose() {
     _videosController.close();
     _searchController.close();
