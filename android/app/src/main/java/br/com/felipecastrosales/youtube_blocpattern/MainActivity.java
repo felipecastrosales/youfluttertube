@@ -1,4 +1,4 @@
-package br.com.felipecastrosales.youtube_blocpattern;
+package br.com.felipecastrosales.youfluttertube;
 
 import io.flutter.embedding.android.FlutterActivity;
 

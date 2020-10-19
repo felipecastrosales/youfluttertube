@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -72,8 +71,8 @@ class DataSearch extends SearchDelegate<String> {
             'en&ds=yt&client=youtube&hjson=t&cp=1&q=$search&format=5&alt=json');
 
     if (response.statusCode == 200) {
-      return json.decode(response.body)[1].map((textVideo) {
-        return textVideo[0];
+      return json.decode(response.body)[1].map((v) {
+        return v[0];
       }).toList();
     } else {
       throw Exception('Failed to load suggestion');
