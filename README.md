@@ -19,18 +19,14 @@
 
 <h2 align="center">Functionalities 🛠️</h2>
 
-   <p>
-     > * Coming Soon
-   </p>
+   > * Coming Soon
 
 ---
 
 <h2 align="center">Challenges and Learnings along the way 🤯</h2>
 
-   <p>
-     > * Coming Soon
-   </p>
-
+   > * Coming Soon
+   
 ---
 
 <h2 align="center">How to Use 🤔</h2>
